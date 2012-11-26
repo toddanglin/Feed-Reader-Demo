@@ -1,22 +1,22 @@
 <!--Kendo UI Templates for index.html-->
 
 <script type="text/x-kendo-template" id="feedItem">
-	<# for (var i = 0; i < data.length; i++) { #>
-	    <li data-feed-name="<#= data[i].Name #>" data-feed-url="<#= data[i].URL #>">	    
-	    <img src="content/img/feed-icon-14x14.png" alt="<#= data[i].Name #>" style="padding-top:5px;width:14px;height:14px;" />
-	    <#= data[i].Name #>	    
+	# for (var i = 0; i < data.length; i++) { #
+	    <li data-feed-name="#= data[i].Name #" data-feed-url="#= data[i].URL #">	    
+	    <img src="content/img/feed-icon-14x14.png" alt="#= data[i].Name #" style="padding-top:5px;width:14px;height:14px;" />
+	    #= data[i].Name #	    
 	    </li>
-	<# } #>
+	# } #
 </script>
 
 
 <script type="text/x-kendo-template" id="rowPost-Summary">
-	<tr class="rowPost" data-post-url="<#= data.link #>">
-		<td colspan="2" data-post-id="<#= data.id #>">
-		<span class="post-title"><#= data.title #></span><br />
-		<time datetime="<#= data.pubDate #>"><#= data.pubDate #></time><br />
+	<tr class="rowPost" data-post-url="#= data.link #">
+		<td colspan="2" data-post-id="#= data.id #">
+		<span class="post-title">#= data.title #</span><br />
+		<time datetime="#= data.pubDate #">#= data.pubDate #</time><br />
 		<span class="post-summary">
-		<#= data.description.replace(/<.*?>/g, '').substr(0,250) #>...
+		#= data.description.replace(/<.*?>/g, '').substr(0,250) #...
 		</span>
 		</td>
 	</tr>
@@ -24,11 +24,11 @@
 
 
 <script type="text/x-kendo-template" id="tmplPostDetail">
-	<article class="post" data-post-url="<#= data.link #>">
+	<article class="post" data-post-url="#= data.link #">
 	<header>
-	<h2><#= data.title #></h2>
-	<time datetime="<#= data.pubDate #>"><#= data.pubDate #></time>
+	<h2>#= data.title #</h2>
+	<time datetime="#= data.pubDate #">#= data.pubDate #</time>
 	</header>
-	<#= data.description #>
+	#= data.description #
 	</article>
 </script>
