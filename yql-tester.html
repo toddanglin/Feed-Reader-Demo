@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>YQL Tester</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  
+
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="scripts/kendo.all.min.js"></script>
+    
+  
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+</head>
+<body>
+<h1>YQL Tester</h1>
+<p>Simple scratch page to test loading RSS data via YQL using Kendo UI DataSource</p>
+  <button id="btnLoad">Get Data</button>
+  <div id="results"></div>
+  
+  <script type="text/javascript">
+	  $(function(){
+	    
+	    $("#btnLoad").bind("click", loadData);
+	    
+	  });
+	  
+	  function loadData(){
+	     var dataSource = new kendo.data.DataSource({
+	            transport:{
+	                    read:{
+	                      url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%3D'http%3A%2F%2Fwww.engadget.com%2Frss.xml'&format=json",    
+	                      dataType: "jsonp"
+	                    }
+	            },
+	            schema:{
+	                    type:"json",
+	                    data: "query.results.rss.channel.item",
+	                    model:{
+	                      fields:{
+	                        title: "title",
+	                        pubDate: "pubDate",
+	                        story: "description",
+	                        url: "link",
+	                        id: "guid"
+	                      }
+	                    }
+	                    
+	            },
+	            change: function(){
+	                    $("#results").text(kendo.stringify(this.view()));
+	            }
+	    });
+	    
+	    dataSource.read(); 
+	  }  
+  </script>
+</body>
+</html>

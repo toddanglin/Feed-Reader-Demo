@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Kendo UI Feed Reader</title>
+	
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->	
+	
+	<!--Normalize browser styles-->
+	<link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+	
+	<!--Kendo UI Styles-->
+	<!--<link href="http://cdn.kendostatic.com/2011.2.804/styles/kendo.common.min.css" rel="stylesheet"/>
+	<link href="http://cdn.kendostatic.com/2011.2.804/styles/kendo.blueopal.min.css" rel="stylesheet"/>-->
+	<link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+	<link href="styles/kendo.blueopal.min.css" rel="stylesheet" type="text/css" />
+	
+	<style>
+		#preLoad{			
+			width:100%;
+			height:100%;
+			background:#FFF;
+			position:absolute;
+			top:0;	
+			
+			-moz-transition: visibility 0s linear 1s, opacity 1s ease-in-out 0s;
+			-webkit-transition: visibility 0s linear 1s, opacity 1s ease-in-out 0s;		
+			-o-transition: visibility 0s linear 1s, opacity 1s ease-in-out 0s;
+			transition: visibility 0s linear 1s, opacity 1s ease-in-out 0s;
+		}		
+		
+		#preLoad div{
+			position:absolute;
+			top: 50%;
+			left: 50%;
+			height:60px;
+			margin-top: -30px;
+			margin-left: -24px;
+		}
+	</style>
+		
+	<!--Site styles + LESS Parser-->
+	<link rel="stylesheet/less" type="text/css" href="styles/site.less" />
+	<!--LESS JS Parser-->
+	<script src="http://lesscss.googlecode.com/files/less-1.1.3.min.js"></script>
+	
+	<script type="text/javascript">
+		<!--Console global variable fix for IE-->
+		if (typeof window.console === "undefined") {
+		  window.console = {
+		    log: function() {
+		    }
+		  };
+		}
+	</script>
+</head>
+<body>
+	<div id="mainVsplit">
+		<div>
+			<div class="buttonBar">
+			<button class="k-button" data-event="addFeed" id="btnAddFeed">Add Feed</button>
+			<button class="k-button" data-event="removeFeed" id="btnRemoveFeed">Remove Feed</button>
+			</div>
+			<ul id="feedList">
+				<li class="k-state-active">Favorite Feeds
+					<ul id="feedItems">
+						<li>No feeds loaded</li>
+					</ul>
+				</li>	
+			</ul>
+		</div>
+		<div>
+			<div id="mainHsplit">
+				<div>
+					<div class="buttonBar">
+					<button class="k-button" data-event="toggleSummary" id="btnToggleSummary">Toggle Summary</button>
+					</div>
+					<div id="feedGrid"></div>
+				</div>
+				<div>
+					<div class="buttonBar">
+					<button class="k-button" data-event="goToPost" id="btnGoToPost">Go To Post</button>
+					</div>
+					<div id="postDetail">
+					
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	
+	<div id="preLoad">
+		<div>
+			<img src="styles/BlueOpal/loading-image.gif" alt="Loading Image" style="width:48px;" />
+			<br />Loading...
+		</div>
+	</div>
+	
+	<div id="addFeedWindow" style="display:none;">
+	<label>Feed URL:</label> <input type="text" id="txtFeedUrl" />
+	<button class="k-button" placeholder="Enter a RSS URL (including http://)" data-event="saveFeed" id="btnSaveFeed">Save</button>
+	</div>	
+
+	<!--Kendo UI Scripts + jQuery-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	
+	<!--[if lt IE 10]>
+	<!--iecors provides a jQuery ajax custom transport for IE8/9 XDR-->
+	<script src="scripts/jquery.iecors.js"></script>
+	<![endif]-->
+	
+	<!--<script src="http://cdn.kendostatic.com/2011.2.804/js/kendo.all.min.js"></script>-->
+	<script src="scripts/kendo.all.min.js"></script>
+	
+	<!--Load Site Script & Init UI-->
+	<script src="scripts/feedreader.templateloader.js"></script>
+	<script src="scripts/feedreader.feed.js"></script>
+	<script src="scripts/index.html.js"></script>
+	
+	<script type="text/javascript">
+		$(function() {			
+			console.log("Initing Page");
+			feedManager.init();
+			app.init();
+			
+			$(document).bind("FEED_READER_APP_READY",function(){ 
+				$("#preLoad").css("opacity","0").css("visibility","hidden"); 
+			});			
+			
+		});
+	</script>
+</body>
+</html>
