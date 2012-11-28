@@ -151,8 +151,9 @@ var feedManager = (function($, host, kendo, console){
 		init: function(){
 			if(localStorage.feeds === undefined || localStorage.feeds === null || localStorage.feeds === "[]"){
 				//Add a default item to local storage
-				var defaultFeed = { Name: "Engadget", URL: "http://www.engadget.com/rss.xml" };
-				
+				//var defaultFeed = { Name: "Engadget", URL: "http://www.engadget.com/rss.xml" };
+				var defaultFeed = { Name: "Kendo UI", URL: "http://www.kendoui.com/blogs/blogs.rss" };
+
 				localStorage.feeds = kendo.stringify([defaultFeed]);
 				
 				_private.feeds = [defaultFeed];
